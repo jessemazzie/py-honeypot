@@ -23,6 +23,8 @@ def openPort(port):
     try:
         port = int(port)
         print(port)
+		
+        socket.listen(port)
     except TypeError:
         print('Invalid arguments. Argument must be integer in range: 0-65535.')
 
