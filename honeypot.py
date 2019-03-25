@@ -13,11 +13,12 @@ def main():
         openPort(sys.argv[1]) #strip first element from sys.argv, because that is the program name.
 
 
-
+#Exits program
 def exit():
     print('Exiting...')
     sys.exit()
 
+#Listens on a given port.
 def openPort(port):
     try:
         port = int(port)
@@ -25,4 +26,5 @@ def openPort(port):
     except TypeError:
         print('Invalid arguments. Argument must be integer in range: 0-65535.')
 
+#enter main program loop.
 main()
