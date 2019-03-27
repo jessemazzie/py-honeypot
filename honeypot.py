@@ -1,4 +1,4 @@
-import socket
+from socket import socket, AF_INET, SOCK_STREAM
 import sys
 
 
@@ -20,13 +20,15 @@ def exit():
 
 #Listens on a given port.
 def openPort(port):
-    try:
-        port = int(port)
-        print(port)
-		
-        socket.listen(port)
-    except TypeError:
-        print('Invalid arguments. Argument must be integer in range: 0-65535.')
+    #try:
+	sock = socket(AF_INET, SOCK_STREAM)
+	port = int(port)
+	print(port)
+	
+	sock.bind([port])
+        
+    #except TypeError:
+     #   print('Invalid arguments. Argument must be integer in range: 0-65535.')
 
 #enter main program loop.
 main()
