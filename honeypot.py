@@ -1,8 +1,6 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import sys
 
-
-
 #Main function. Controls general program flow.
 def main():
 	if len(sys.argv) != 2:
@@ -11,7 +9,6 @@ def main():
 	else:
 		print('Starting...')
 		openPort(sys.argv[1]) #strip first element from sys.argv, because that is the program name.
-
 
 #Exits program
 def exit():
@@ -39,6 +36,7 @@ def openPort(port):
 	except TypeError:
 		print('Invalid arguments. Argument must be integer in range: 0-65535.')
 
+#Used for appending access logs to end of log file.
 def log(text_to_log):
 	with open("honeypot.log") as f:
 		f.write(text_to_log)
