@@ -25,7 +25,6 @@ def openPort(port):
 		sock.bind(('127.0.0.1', port))
 	
 		sock.listen()
-		
 			
 		while True:
 			connection, client_addr = sock.accept()
