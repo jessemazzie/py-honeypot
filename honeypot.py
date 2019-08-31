@@ -8,7 +8,7 @@ def main():
 		exit()
 	else:
 		print('Starting...')
-		openPort(sys.argv[1]) #strip first element from sys.argv, because that is the program name.
+		openPort(sys.argv[1]) #ignore first element from sys.argv, because that is the program name.
 
 #Exits program
 def exit():
@@ -28,10 +28,12 @@ def openPort(port):
 			
 		while True:
 			connection, client_addr = sock.accept()
+
+			print(sock.getpeername())
 			print(connection)
 			
 			print(client_addr)
-    
+
 	except TypeError:
 		print('Invalid arguments. Argument must be integer in range: 0-65535.')
 
@@ -39,6 +41,7 @@ def openPort(port):
 def log(text_to_log):
 	with open("honeypot.log") as f:
 		f.write(text_to_log)
+
 
 #enter main program loop.
 main()
