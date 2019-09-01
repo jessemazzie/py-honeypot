@@ -29,7 +29,7 @@ def openPort(port):
 		while True:
 			connection, client_addr = sock.accept()
 
-			print(sock.getpeername())
+			print(connection.getpeername())
 			print(connection)
 			
 			print(client_addr)
