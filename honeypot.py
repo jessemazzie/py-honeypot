@@ -1,5 +1,6 @@
 from socket import socket, AF_INET, SOCK_STREAM
 import sys
+import datetime
 
 #Main function. Controls general program flow.
 def main():
@@ -17,30 +18,31 @@ def exit():
 
 #Listens on a given port.
 def openPort(port):
+
+	sock = socket(AF_INET, SOCK_STREAM)
+	port = port
+	log("Listening on port " + port)
+
 	try:
-		sock = socket(AF_INET, SOCK_STREAM)
-		port = int(port)
-		print(port)
-	
-		sock.bind(('127.0.0.1', port))
-	
-		sock.listen()
-			
-		while True:
-			connection, client_addr = sock.accept()
-
-			print(connection.getpeername())
-			print(connection)
-			
-			print(client_addr)
-
+		sock.bind(('127.0.0.1', int(port)))
 	except TypeError:
 		print('Invalid arguments. Argument must be integer in range: 0-65535.')
+		exit()
+	
+	sock.listen()
+
+	while True:
+		connection, client_addr = sock.accept()
+
+		log("Connection made by: " + connection.getpeername()[0]) #first element in peer name is the IP address of the client.
 
 #Used for appending access logs to end of log file.
 def log(text_to_log):
-	with open("honeypot.log") as f:
-		f.write(text_to_log)
+	timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+	with open("honeypot.log", "w") as f:
+		print("[" + timestamp + "] " + text_to_log)
+		f.write("[" + timestamp + "] " + text_to_log)
 
 
 #enter main program loop.
