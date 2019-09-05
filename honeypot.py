@@ -2,8 +2,9 @@ from socket import socket, AF_INET, SOCK_STREAM
 import sys
 import datetime
 
+
 #Main function. Controls general program flow.
-def main():
+def main() -> None:
 	if len(sys.argv) != 2:
 		print('No port number supplied.')
 		exit()
@@ -11,13 +12,15 @@ def main():
 		print('Starting...')
 		openPort(sys.argv[1]) #ignore first element from sys.argv, because that is the program name.
 
+
 #Exits program
-def exit():
+def exit() -> None:
 	print('Exiting...')
 	sys.exit()
 
+
 #Listens on a given port.
-def openPort(port):
+def openPort(port: int) -> None:
 
 	sock = socket(AF_INET, SOCK_STREAM)
 	port = port
@@ -36,8 +39,9 @@ def openPort(port):
 
 		log("Connection made by: " + connection.getpeername()[0]) #first element in peer name is the IP address of the client.
 
+
 #Used for appending access logs to end of log file.
-def log(text_to_log):
+def log(text_to_log: str) -> None:
 	timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 	with open("honeypot.log", "w") as f:
