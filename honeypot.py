@@ -5,12 +5,14 @@ import datetime
 
 #Main function. Controls general program flow.
 def main() -> None:
-	if len(sys.argv) != 2:
-		print('No port number supplied.')
+	if len(sys.argv) < 2:
+		print('No port number(s) supplied.')
 		exit()
 	else:
 		print('Starting...')
-		openPort(sys.argv[1]) #ignore first element from sys.argv, because that is the program name.
+		# ignore first element from sys.argv, because that is the program name.
+		for port in sys.argv[1:]:
+			openPort(port)
 
 
 #Exits program
