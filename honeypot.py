@@ -3,25 +3,28 @@ import sys
 import datetime
 
 
-#Main function. Controls general program flow.
+# Main function. Controls general program flow.
 def main() -> None:
 	if len(sys.argv) < 2:
 		print('No port number(s) supplied.')
 		exit()
 	else:
 		print('Starting...')
+		# Remove all duplicates, strip program name.
+		ports = list(set(sys.argv[1:]))
 		# ignore first element from sys.argv, because that is the program name.
-		for port in sys.argv[1:]:
+		# TODO: openPort should be run in a new thread for each port.
+		for port in ports:
 			openPort(port)
 
 
-#Exits program
+# Exits program
 def exit() -> None:
 	print('Exiting...')
 	sys.exit()
 
 
-#Listens on a given port.
+# Listens on a given port.
 def openPort(port: int) -> None:
 
 	sock = socket(AF_INET, SOCK_STREAM)
@@ -42,7 +45,7 @@ def openPort(port: int) -> None:
 		log("Connection made by: " + connection.getpeername()[0]) #first element in peer name is the IP address of the client.
 
 
-#Used for appending access logs to end of log file.
+# Used for appending access logs to end of log file.
 def log(text_to_log: str) -> None:
 	timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -51,5 +54,5 @@ def log(text_to_log: str) -> None:
 		f.write("[" + timestamp + "] " + text_to_log)
 
 
-#enter main program loop.
+# enter main program loop.
 main()
