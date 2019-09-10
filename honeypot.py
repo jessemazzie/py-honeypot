@@ -15,7 +15,7 @@ def main() -> None:
 		# ignore first element from sys.argv, because that is the program name.
 		# TODO: openPort should be run in a new thread for each port.
 		for port in ports:
-			openPort(port)
+			open_port(port)
 
 
 # Exits program
@@ -25,7 +25,7 @@ def exit() -> None:
 
 
 # Listens on a given port.
-def openPort(port: int) -> None:
+def open_port(port: int) -> None:
 
 	sock = socket(AF_INET, SOCK_STREAM)
 	port = port
@@ -39,10 +39,11 @@ def openPort(port: int) -> None:
 	
 	sock.listen()
 
+	# Listen forever.
 	while True:
 		connection, client_addr = sock.accept()
 
-		log("Connection made by: " + connection.getpeername()[0]) #first element in peer name is the IP address of the client.
+		log("Connection made by: " + connection.getpeername()[0])  # first element in peername is the IP address of the client
 
 
 # Used for appending access logs to end of log file.
